@@ -11,13 +11,6 @@ in
   home-manager = {
     useGlobalPkgs = true;
     users."qtf0x" = { pkgs, ... }: {
-      # Configure keymap again in case GNOME overwrites XKB options
-      #dconf.settings = {
-      #  "org/gnome/desktop/input-sources" = {
-      #    xkb-options = [ "caps:escape" ];
-      #  };
-      #};
-
       wayland.windowManager.sway = {
         enable = true;
         wrapperFeatures.gtk = true; # Fixes common issues with GTK 3 apps
@@ -33,10 +26,13 @@ in
         };
       };
 
+      fonts.fontconfig.enable = true;
+
       home = {
         packages = with pkgs; [
           mpv
           wget
+          iosevka-bin
         ];
 
         sessionVariables = {
@@ -51,6 +47,11 @@ in
 
       programs = {
         home-manager.enable = true;
+
+        kitty = {
+          enable = true;
+          font.name = "Iosevka Fixed";
+        };
 
         bash = {
           enable = true;
