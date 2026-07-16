@@ -14,7 +14,8 @@ in
       wayland.windowManager.sway = {
         enable = true;
         wrapperFeatures.gtk = true; # Fixes common issues with GTK 3 apps
-        config = rec {
+        checkConfig = false;
+        config = {
           modifier = "Mod4";
           # Use kitty as default terminal
           terminal = "kitty";
@@ -22,6 +23,11 @@ in
           input."*" = {
             xkb_layout = "us";
             xkb_options = "caps:escape";
+          };
+
+          output."*" = {
+            mode = "1920x1080@60hz";
+            bg = "/home/qtf0x/Downloads/geese-rock-band.jpg fill";
           };
         };
       };
@@ -36,6 +42,9 @@ in
           obsidian
           zotero
           tmux
+
+          # Sway extensions
+          swaybg
         ];
 
         sessionVariables = {
@@ -54,6 +63,16 @@ in
         kitty = {
           enable = true;
           font.name = "Iosevka Fixed";
+
+          settings = {
+            confirm_os_window_close = 0;
+            dynamic_background_opacity = true;
+            enable_audio_bell = false;
+            mouse_hide_wait = "-1.0";
+            window_padding_width = 10;
+            background_opacity = "0.85";
+            background_blur = 64;
+          };
         };
 
         bash = {
